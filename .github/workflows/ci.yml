@@ -1,0 +1,18 @@
+name: Pipeline de CI - evaluation-service
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  ci:
+    uses: FIAP-Teach-Challenge-2/toggle-master-ci/.github/workflows/reusable-ci-go.yml@main
+    with:
+      service-name: evaluation-service
+      ecr-repository: togglemaster/evaluation-service
+    secrets:
+      AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+      AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+      AWS_SESSION_TOKEN: ${{ secrets.AWS_SESSION_TOKEN }}
