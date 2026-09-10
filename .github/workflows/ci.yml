@@ -12,5 +12,5 @@ jobs:
     with:
       service-name: evaluation-service
       ecr-repository: togglemaster/evaluation-service
-      go-version: "1.25"
+      go-version: "1.24"
     secrets: inherit
