@@ -4,7 +4,10 @@ import (
 	"encoding/json"
 	"log"
 	"net/http"
+	"regexp"
 )
+
+var safeFlagName = regexp.MustCompile(`^[a-zA-Z0-9_-]+$`)
 
 type EvaluationResponse struct {
 	FlagName string `json:"flag_name"`
@@ -27,6 +30,10 @@ func (a *App) evaluationHandler(w http.ResponseWriter, r *http.Request) {
 
 	if userID == "" || flagName == "" {
 		http.Error(w, `{"error": "user_id e flag_name são obrigatórios"}`, http.StatusBadRequest)
+		return
+	}
+	if !safeFlagName.MatchString(flagName) {
+		http.Error(w, `{"error": "flag_name contém caracteres inválidos"}`, http.StatusBadRequest)
 		return
 	}
 
