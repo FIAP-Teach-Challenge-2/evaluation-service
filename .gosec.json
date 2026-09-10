@@ -1,3 +1,5 @@
 {
-  "exclude": ["G704"]
+  "global": {
+    "exclude": ["G704"]
+  }
 }
